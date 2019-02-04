@@ -11,7 +11,6 @@
 })();
 
 //add items to the cart
-
 (function(){
  const cartBtn = document.querySelectorAll('.store-item-icon');
  cartBtn.forEach(function(btn){
@@ -85,5 +84,63 @@ function showTotals(){
 	document.querySelector('.item-total').textContent = finalMoney;
 	document.getElementById('item-count').textContent = total.length;
 };
+})();
+
+//filter btns
+(()=>{
+  const filterBtn = document.querySelectorAll('.filter-btn');
+ // console.log(filterBtn)
+  filterBtn.forEach(btn => {
+    btn.addEventListener('click', event =>{
+    event.preventDefault();
+
+    const value = event.target.dataset.filter;
+    //console.log(value);
+    const items = document.querySelectorAll('.store-item');
+    //console.log(items);
+      items.forEach(function(item){
+        if(value === 'all'){
+          item.style.display = 'block';
+        }else 
+        if (item.classList.contains(value)){
+          item.style.display = 'block';
+        }
+          else {
+            item.style.display = 'none';
+          }
+      });
+    });
+  });
+
+})();
+
+//search input
+(()=>{
+  //target search box
+const search = document.getElementById('search-item');
+
+search.addEventListener('keyup', function(){
+  let value = search.value.toLowerCase().trim();
+
+  const items = document.querySelectorAll('.store-item');
+   items.forEach(function(item){
+      let type = item.dataset.item;
+
+    //  if(type.includes(value)){
+    //    item.style.display = 'block'
+   //   } else {
+   //     item.style.display = 'none'
+   //   }
+   let length = value.length;
+   let match = type.slice(0, length);
+   if (value === match) {
+     item.style.display = 'block'
+   } else {
+     item.style.display = 'none'
+   }
+
+   });
+})
+
 
 })();
